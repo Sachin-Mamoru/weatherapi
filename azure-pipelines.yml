@@ -23,7 +23,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'GW-Train Docker Hub'
-        repository: 'Sachin-Mamoru/weatherapi'
+        repository: 'sachinm4d/wapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
