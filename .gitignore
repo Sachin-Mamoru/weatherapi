@@ -40,4 +40,5 @@ msbuild.wrn
 *.so
 
 # Terraform
-.terraform
+.terraform*
+*.tfstate*
