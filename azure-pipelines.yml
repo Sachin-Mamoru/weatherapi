@@ -28,7 +28,7 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
-- stage: Environment Provision
+- stage: EnvironmentProvision
   displayName: 'Terraform Infrastructure Provisioning onAzure ....'
   dependsOn: Build
   jobs:
