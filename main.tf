@@ -67,9 +67,8 @@ resource "azuread_application" "azdevopssp" {
   display_name = "azdevopsterraform"
 }
 
-resource "random_string" "password" {
-  length  = 32
-  special = true
+module "azuread-service-principal-password" {
+  source = ".//modules/Random-String"
 }
 
 resource "azuread_service_principal" "azdevopssp" {
@@ -78,11 +77,11 @@ resource "azuread_service_principal" "azdevopssp" {
 
 resource "azuread_service_principal_password" "azdevopssp" {
   service_principal_id = azuread_service_principal.azdevopssp.id
-  value                = random_string.password.result
+  value                = module.azuread-service-principal-password.value
   end_date             = "2024-01-01T00:00:00Z"
 
   depends_on = [
-    random_string.password
+    module.azuread-service-principal-password
   ]
 }
 
