@@ -10,3 +10,9 @@ variable "secret_value" {
   description = "Key Vault Secret value in Azure"
   sensitive   = true
 }
+
+variable "imagebuild" {
+  type = string
+  description = "Latest Image Build"
+  default = "value"
+}
