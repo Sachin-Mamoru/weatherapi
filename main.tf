@@ -75,11 +75,11 @@ resource "azuread_service_principal" "azdevopssp" {
   application_id = azuread_application.azdevopssp.application_id
 }
 
-resource "azuread_service_principal_password" "azdevopssp" {
-  service_principal_id = azuread_service_principal.azdevopssp.id
-  value                = "module.azuread-service-principal-password.value"
-  end_date             = "2024-01-01T00:00:00Z"
-}
+# resource "azuread_service_principal_password" "azdevopssp" {
+#   service_principal_id = azuread_service_principal.azdevopssp.id
+#   value                = "sfvvvdv"
+#   end_date             = "2024-01-01T00:00:00Z"
+# }
 
 resource "azurerm_role_assignment" "main" {
   principal_id         = azuread_service_principal.azdevopssp.id
