@@ -14,5 +14,4 @@ variable "secret_value" {
 variable "imagebuild" {
   type = string
   description = "Latest Image Build"
-  default = "value"
 }
