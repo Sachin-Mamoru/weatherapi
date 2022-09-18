@@ -122,18 +122,10 @@ module "common-secrets-key-vault" {
     "scr-2" = {
       name  = "scr-2",
       value = module.secret2-random-password.value
-    },
-    "scr-3" = {
-      name  = "scr-3",
-      value = module.secret3-random-password.value # nCkZ%NbBXmIMVpjf5XTugKY#pL6syK
-    }
-    "scr-4" = {
-      name  = "scr-4",
-      value = module.secret4-random-password.value # nCkZ%NbBXmIMVpjf5XTugKY#pL6syK
     }
   }
   depends_on = [
-    azurerm_key_vault.keyvault ,module.secret1-random-password, module.secret2-random-password, module.secret3-random-password, module.secret4-random-password
+    azurerm_key_vault.keyvault ,module.secret1-random-password, module.secret2-random-password
   ]
 }
 
