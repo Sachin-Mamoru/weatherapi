@@ -64,7 +64,7 @@ resource "azurerm_key_vault" "keyvault" {
 ## Service Principal for DevOps
 
 resource "azuread_application" "azdevopssp" {
-  display_name = "azdevopsterraform"
+  display_name = "TerraformAppforServicePrincipal"
 }
 
 module "azuread-service-principal-password" {
