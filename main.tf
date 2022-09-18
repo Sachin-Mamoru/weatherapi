@@ -63,7 +63,7 @@ resource "azurerm_key_vault" "keyvault" {
   #   ip_rules = ["50.50.50.50/24"]
   # }
   depends_on = [
-    azurerm_resource_group.rg
+    azurerm_resource_group.tf_test
   ]
 }
 ## Service Principal for DevOps
