@@ -80,6 +80,10 @@ resource "azuread_service_principal_password" "azdevopssp" {
   service_principal_id = azuread_service_principal.azdevopssp.id
   value                = random_string.password.result
   end_date             = "2024-01-01T00:00:00Z"
+
+  depends_on = [
+    random_string.password
+  ]
 }
 
 resource "azurerm_role_assignment" "main" {
