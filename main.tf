@@ -79,10 +79,6 @@ resource "azuread_service_principal_password" "azdevopssp" {
   service_principal_id = azuread_service_principal.azdevopssp.id
   value                = "module.azuread-service-principal-password.value"
   end_date             = "2024-01-01T00:00:00Z"
-
-  depends_on = [
-    module.azuread-service-principal-password
-  ]
 }
 
 resource "azurerm_role_assignment" "main" {
