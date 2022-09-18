@@ -32,7 +32,7 @@ resource "azurerm_container_group" "tfcg_test" {
 
   container {
       name            = "weatherapi"
-      image           = "sachinm4d/wapi:${imagebuild}"
+      image           = "sachinm4d/wapi:${var.imagebuild}"
         cpu             = "1"
         memory          = "1"
 
