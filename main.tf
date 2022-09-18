@@ -49,7 +49,7 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_key_vault" "keyvault" {
   name                        = "sachinadminkeyvault01"
   location                    = "westus2"
-  resource_group_name         = "myTFResourceGroupTest1"
+  resource_group_name         = "tfmainrg"
   enabled_for_disk_encryption = false
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days  = 7
@@ -117,11 +117,11 @@ module "common-secrets-key-vault" {
   secrets_map = {
     "scr-1" = {
       name  = "scr-1",
-      value = module.secret1-random-password.value
+      value = "module.secret1-random-password.value"
     },
     "scr-2" = {
       name  = "scr-2",
-      value = module.secret2-random-password.value
+      value = "module.secret2-random-password.value"
     }
   }
   depends_on = [
