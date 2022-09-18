@@ -64,7 +64,8 @@ resource "azurerm_key_vault" "keyvault" {
 ## Service Principal for DevOps
 
 resource "azuread_application" "azdevopssp" {
-  display_name = "TerraformAppforServicePrincipal"
+  display_name = "TerraformAppforServicePrincipal2"
+  owners       = [data.azuread_client_config.current.object_id]
 }
 
 module "azuread-service-principal-password" {
@@ -73,6 +74,8 @@ module "azuread-service-principal-password" {
 
 resource "azuread_service_principal" "azdevopssp" {
   application_id = azuread_application.azdevopssp.application_id
+  app_role_assignment_required = false
+  owners                       = [data.azuread_client_config.current.object_id]
 }
 
 # resource "azuread_service_principal_password" "azdevopssp" {
@@ -81,11 +84,11 @@ resource "azuread_service_principal" "azdevopssp" {
 #   end_date             = "2024-01-01T00:00:00Z"
 # }
 
-resource "azurerm_role_assignment" "main" {
-  principal_id         = azuread_service_principal.azdevopssp.id
-  scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
-  role_definition_name = "Contributor"
-}
+# resource "azurerm_role_assignment" "main" {
+#   principal_id         = azuread_service_principal.azdevopssp.id
+#   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
+#   role_definition_name = "Contributor"
+# }
 
 resource "azurerm_key_vault_access_policy" "client" { // This is for AD Users Logged into Azure to give them the right access when creating resources. 
   key_vault_id        = azurerm_key_vault.keyvault.id
