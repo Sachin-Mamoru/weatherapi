@@ -28,6 +28,12 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
+    - task: AzureKeyVault@1
+      inputs:
+        ConnectedServiceName: $(service_name)
+        keyVaultName: $(key_vault_name)
+        secretsFilter: '*'
+        runAsPreJob: false
 - stage: EnvironmentProvision
   displayName: 'Terraform Infrastructure Provisioning onAzure ....'
   dependsOn: Build
