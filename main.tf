@@ -41,22 +41,10 @@ data "azuread_client_config" "current" {}
 
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_key_vault" "keyvault" {
-  name                        = "sachinadminkeyvault01"
-  location                    = "westus2"
-  resource_group_name         = "tfmainrg"
-  enabled_for_disk_encryption = false
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  soft_delete_retention_days  = 7
-  purge_protection_enabled    = false
+module "keyvault" {
+  source = ".//modules/Key-Vault"
+  tenant_id = data.azurerm_client_config.current.tenant_id
 
-  sku_name = "standard"
-
-  # network_acls {
-  #   default_action = "Deny" # "Allow" 
-  #   bypass         = "AzureServices" # "None"
-  #   ip_rules = ["50.50.50.50/24"]
-  # }
   depends_on = [
     azurerm_resource_group.tf_test
   ]
@@ -112,7 +100,7 @@ resource "azurerm_key_vault" "keyvault" {
 
 module "common-secrets-key-vault" {
   source       = ".//modules/Key-Vault-Secret"
-  key_vault_id = azurerm_key_vault.keyvault.id
+  key_vault_id = module.keyvault.azurerm_key_vault.keyvault.id
   secrets_map = {
     "scr-1" = {
       name  = "scr-1",
@@ -124,14 +112,14 @@ module "common-secrets-key-vault" {
     }
   }
   depends_on = [
-    azurerm_key_vault.keyvault ,module.secret1-random-password, module.secret2-random-password
+    module.keyvault
   ]
 }
 
-module "secret1-random-password" {
-  source = ".//modules/Random-Password"
-}
+# module "secret1-random-password" {
+#   source = ".//modules/Random-Password"
+# }
 
-module "secret2-random-password" {
-  source = ".//modules/Random-Password"
-}
+# module "secret2-random-password" {
+#   source = ".//modules/Random-Password"
+# }
