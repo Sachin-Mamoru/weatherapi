@@ -94,12 +94,12 @@ module "common-secrets-key-vault" {
   source       = ".//modules/Key-Vault-Secret"
   key_vault_id = module.keyvault.id
   secrets_map = {
-    "scr-3" = {
-      name  = "scr-1",
+    "scr-03" = {
+      name  = "scr-3",
       value = module.secret1-random-password.value
     },
-    "scr-4" = {
-      name  = "scr-2",
+    "scr-04" = {
+      name  = "scr-4",
       value = module.secret2-random-password.value
     }
   }
