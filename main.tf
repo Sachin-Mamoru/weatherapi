@@ -89,9 +89,9 @@ resource "azurerm_key_vault" "keyvault" {
 #   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
 #   role_definition_name = "Contributor"
 # }
-data "azuread_user" "user" {
-  user_principal_name = "gwtrain4d_gmail.com#EXT#@gwtrain4dgmail.onmicrosoft.com"
-}
+# data "azuread_user" "user" {
+#   user_principal_name = "gwtrain4d_gmail.com#EXT#@gwtrain4dgmail.onmicrosoft.com"
+# }
 resource "azurerm_key_vault_access_policy" "client" { // This is for AD Users Logged into Azure to give them the right access when creating resources. 
   key_vault_id        = azurerm_key_vault.keyvault.id
   tenant_id           = data.azurerm_client_config.current.tenant_id
