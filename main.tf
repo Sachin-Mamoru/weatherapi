@@ -84,7 +84,7 @@ module "keyvault" {
 resource "azurerm_key_vault_access_policy" "service_principal" { // This is for the Service Principal in the pipeline to be able to make changes to Key Vault. 
   key_vault_id        = module.keyvault.id
   tenant_id           = data.azurerm_client_config.current.tenant_id
-  object_id           = data.azurerm_client_config.current.object_id
+  object_id           = "7e101e9b-3b0a-4b0a-920d-ba3ba0809027"
   secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set", ]
   key_permissions     = ["Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", ]
   storage_permissions = ["Backup", "Delete", "DeleteSAS", "Get", "GetSAS", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update", ]
@@ -94,19 +94,20 @@ module "common-secrets-key-vault" {
   source       = ".//modules/Key-Vault-Secret"
   key_vault_id = module.keyvault.id
   secrets_map = {
-    "scr-03" = {
-      name  = "scr-3",
+    "scr-05" = {
+      name  = "scr-5",
       value = module.secret1-random-password.value
     },
-    "scr-04" = {
-      name  = "scr-4",
+    "scr-06" = {
+      name  = "scr-6",
       value = module.secret2-random-password.value
     }
   }
   depends_on = [
     module.keyvault,
     module.secret1-random-password,
-    module.secret2-random-password
+    module.secret2-random-password,
+    azurerm_key_vault_access_policy.service_principal
   ]
 }
 
