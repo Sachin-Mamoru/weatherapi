@@ -63,20 +63,20 @@ resource "azurerm_key_vault" "keyvault" {
 }
 ## Service Principal for DevOps
 
-resource "azuread_application" "azdevopssp" {
-  display_name = "TerraformAppforServicePrincipal2"
-  owners       = [data.azuread_client_config.current.object_id]
-}
+# resource "azuread_application" "azdevopssp" {
+#   display_name = "TerraformAppforServicePrincipal2"
+#   owners       = [data.azuread_client_config.current.object_id]
+# }
 
-module "azuread-service-principal-password" {
-  source = ".//modules/Random-String"
-}
+# module "azuread-service-principal-password" {
+#   source = ".//modules/Random-String"
+# }
 
-resource "azuread_service_principal" "azdevopssp" {
-  application_id = azuread_application.azdevopssp.application_id
-  app_role_assignment_required = false
-  owners                       = [data.azuread_client_config.current.object_id]
-}
+# resource "azuread_service_principal" "azdevopssp" {
+#   application_id = azuread_application.azdevopssp.application_id
+#   app_role_assignment_required = false
+#   owners                       = [data.azuread_client_config.current.object_id]
+# }
 
 # resource "azuread_service_principal_password" "azdevopssp" {
 #   service_principal_id = azuread_service_principal.azdevopssp.id
@@ -89,11 +89,13 @@ resource "azuread_service_principal" "azdevopssp" {
 #   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
 #   role_definition_name = "Contributor"
 # }
-
+data "azuread_user" "user" {
+  user_principal_name = "gwtrain4d_gmail.com#EXT#@gwtrain4dgmail.onmicrosoft.com"
+}
 resource "azurerm_key_vault_access_policy" "client" { // This is for AD Users Logged into Azure to give them the right access when creating resources. 
   key_vault_id        = azurerm_key_vault.keyvault.id
   tenant_id           = data.azurerm_client_config.current.tenant_id
-  object_id           = azuread_service_principal.azdevopssp.object_id
+  object_id           = data.azuread_user.user.object_id
   secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set", ]
   key_permissions     = ["Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", ]
   storage_permissions = ["Backup", "Delete", "DeleteSAS", "Get", "GetSAS", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update", ]
