@@ -80,23 +80,15 @@ module "keyvault" {
 # data "azuread_user" "user" {
 #   user_principal_name = "gwtrain4d_gmail.com#EXT#@gwtrain4dgmail.onmicrosoft.com"
 # }
-# resource "azurerm_key_vault_access_policy" "client" { // This is for AD Users Logged into Azure to give them the right access when creating resources. 
-#   key_vault_id        = azurerm_key_vault.keyvault.id
-#   tenant_id           = data.azurerm_client_config.current.tenant_id
-#   object_id           = "7312a6db-91ee-4ef9-88d9-ef03ceb43d80"
-#   secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set", ]
-#   key_permissions     = ["Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", ]
-#   storage_permissions = ["Backup", "Delete", "DeleteSAS", "Get", "GetSAS", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update", ]
-# }
 
-# resource "azurerm_key_vault_access_policy" "service_principal" { // This is for the Service Principal in the pipeline to be able to make changes to Key Vault. 
-#   key_vault_id        = azurerm_key_vault.keyvault.id
-#   tenant_id           = data.azurerm_client_config.current.tenant_id
-#   object_id           = data.azurerm_client_config.current.object_id
-#   secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set", ]
-#   key_permissions     = ["Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", ]
-#   storage_permissions = ["Backup", "Delete", "DeleteSAS", "Get", "GetSAS", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update", ]
-# }
+resource "azurerm_key_vault_access_policy" "service_principal" { // This is for the Service Principal in the pipeline to be able to make changes to Key Vault. 
+  key_vault_id        = module.keyvault.id
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  object_id           = data.azurerm_client_config.current.object_id
+  secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set", ]
+  key_permissions     = ["Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", ]
+  storage_permissions = ["Backup", "Delete", "DeleteSAS", "Get", "GetSAS", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update", ]
+}
 
 module "common-secrets-key-vault" {
   source       = ".//modules/Key-Vault-Secret"
