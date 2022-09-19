@@ -100,7 +100,7 @@ module "keyvault" {
 
 module "common-secrets-key-vault" {
   source       = ".//modules/Key-Vault-Secret"
-  key_vault_id = module.keyvault.azurerm_key_vault.keyvault.id
+  key_vault_id = module.keyvault.keyvault.id
   secrets_map = {
     "scr-1" = {
       name  = "scr-1",
