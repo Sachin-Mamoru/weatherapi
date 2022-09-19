@@ -104,22 +104,24 @@ module "common-secrets-key-vault" {
   secrets_map = {
     "scr-1" = {
       name  = "scr-1",
-      value = "module.secret1-random-password.value"
+      value = module.secret1-random-password.value
     },
     "scr-2" = {
       name  = "scr-2",
-      value = "module.secret2-random-password.value"
+      value = module.secret2-random-password.value
     }
   }
   depends_on = [
-    module.keyvault
+    module.keyvault,
+    module.secret1-random-password,
+    module.secret2-random-password
   ]
 }
 
-# module "secret1-random-password" {
-#   source = ".//modules/Random-Password"
-# }
+module "secret1-random-password" {
+  source = ".//modules/Random-Password"
+}
 
-# module "secret2-random-password" {
-#   source = ".//modules/Random-Password"
-# }
+module "secret2-random-password" {
+  source = ".//modules/Random-Password"
+}
