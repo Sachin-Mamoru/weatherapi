@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "azurerm_key_vault" "keyvault" {
-  name                        = "sachinadminkeyvault05"
+  name                        = "sachinadminkeyvault07"
   location                    = "westus2"
   resource_group_name         = "tfmainrg"
   enabled_for_disk_encryption = false
