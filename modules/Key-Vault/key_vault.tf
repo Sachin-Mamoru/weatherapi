@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------------------
 
 resource "azurerm_key_vault" "keyvault" {
-  name                        = var.name
+  name                        = var.keyvault_name
   location                    = var.location
   resource_group_name         = var.resource_group_name
   enabled_for_disk_encryption = false

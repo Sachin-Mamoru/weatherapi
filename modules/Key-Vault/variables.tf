@@ -9,7 +9,7 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "name" {
+variable "keyvault_name" {
   description = "The name of the Key Vault"
   type        = string
 }
