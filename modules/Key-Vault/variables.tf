@@ -9,9 +9,9 @@
 #
 # --------------------------------------------------------------------------------------
 
-variable "keyvault_name" {
-  description = "The name of the Key Vault"
+variable "name" {
   type        = string
+  description = "The name of the Key Vault"
 }
 variable "location" {
   description = "The location of the Key Vault where the Secret should be created"

@@ -1,5 +1,3 @@
-keyvault_name = "gw_keyvault"
-
 rg_name = "tfmainrg"
 rg_location = "eastus"
 

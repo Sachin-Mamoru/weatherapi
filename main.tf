@@ -37,13 +37,12 @@ resource "azurerm_container_group" "tfcg_test" {
         }
   }
 }
-data "azuread_client_config" "current" {}
 
 data "azurerm_client_config" "current" {}
 
 module "keyvault" {
   source = ".//modules/Key-Vault"
-  name = var.keyvault_name
+  name = "gw_keyvault"
   location = azurerm_resource_group.tf_test.location
   resource_group_name = azurerm_resource_group.tf_test.name
   tenant_id = data.azurerm_client_config.current.tenant_id
