@@ -9,6 +9,18 @@
 #
 # --------------------------------------------------------------------------------------
 
+variable "name" {
+  description = "The name of the Key Vault"
+  type        = string
+}
+variable "location" {
+  description = "The location of the Key Vault where the Secret should be created"
+  type        = string
+}
+variable "resource_group_name" {
+  description = "The resource_group_name of the Key Vault"
+  type        = string
+}
 variable "tenant_id" {
   description = "The ID of the Key Vault where the Secret should be created"
   type        = string

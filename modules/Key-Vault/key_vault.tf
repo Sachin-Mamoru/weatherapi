@@ -10,9 +10,9 @@
 # --------------------------------------------------------------------------------------
 
 resource "azurerm_key_vault" "keyvault" {
-  name                        = "sachinadminkeyvault07"
-  location                    = "westus2"
-  resource_group_name         = "tfmainrg"
+  name                        = var.name
+  location                    = var.location
+  resource_group_name         = var.resource_group_name
   enabled_for_disk_encryption = false
   tenant_id                   = var.tenant_id
   soft_delete_retention_days  = 7
@@ -25,4 +25,7 @@ resource "azurerm_key_vault" "keyvault" {
   #   bypass         = "AzureServices" # "None"
   #   ip_rules = ["50.50.50.50/24"]
   # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }

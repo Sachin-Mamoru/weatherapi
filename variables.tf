@@ -1,17 +1,24 @@
-variable "secret_name" {
-  type        = string
-  default = "name"
-  description = "Key Vault Secret name in Azure"
-}
-
-variable "secret_value" {
-  type        = string
-  default = "value"
-  description = "Key Vault Secret value in Azure"
-  sensitive   = true
-}
-
 variable "imagebuild" {
   type = string
   description = "Latest Image Build"
+}
+variable "rg_name" {
+  type = string
+  description = "Name of the resource group"
+}
+variable "rg_location" {
+  type = string
+  description = "location of the resource group"
+}
+variable "keyvault_name" {
+  type = string
+  description = "Name of the key vault"
+}
+variable "secret1_name" {
+  type = string
+  description = "Name of the secret1"
+}
+variable "secret2_name" {
+  type = string
+  description = "Name of the secret2"
 }
