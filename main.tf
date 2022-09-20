@@ -42,7 +42,7 @@ data "azurerm_client_config" "current" {}
 
 module "keyvault" {
   source = ".//modules/Key-Vault"
-  name = "gw_keyvault"
+  name = "gwkeyvault"
   location = azurerm_resource_group.tf_test.location
   resource_group_name = azurerm_resource_group.tf_test.name
   tenant_id = data.azurerm_client_config.current.tenant_id
