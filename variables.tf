@@ -10,10 +10,6 @@ variable "rg_location" {
   type = string
   description = "location of the resource group"
 }
-variable "keyvault_name" {
-  type = string
-  description = "Name of the key vault"
-}
 variable "secret1_name" {
   type = string
   description = "Name of the secret1"
