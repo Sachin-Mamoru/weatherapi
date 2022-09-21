@@ -1,4 +1,4 @@
-keyvault_name = "gwkeyvault01"
+keyvault_name = "gwkeyvault02"
 
 rg_name = "tfmainrg"
 rg_location = "eastus"
