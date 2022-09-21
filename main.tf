@@ -64,11 +64,11 @@ module "common-secrets-key-vault" {
   source       = ".//modules/Key-Vault-Secret"
   key_vault_id = module.keyvault.id
   secrets_map = {
-    "scr-07" = {
+    "scr-001" = {
       name  = var.secret1_name,
       value = module.secret1-random-password.value
     },
-    "scr-08" = {
+    "scr-002" = {
       name  = var.secret2_name,
       value = module.secret2-random-password.value
     }
