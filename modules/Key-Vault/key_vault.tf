@@ -20,11 +20,11 @@ resource "azurerm_key_vault" "keyvault" {
 
   sku_name = "standard"
 
-  network_acls {
-    default_action = "Deny"
-    bypass         = "AzureServices"
-    ip_rules = ["18.233.39.91"]
-  }
+  # network_acls {
+  #   default_action = "Deny"
+  #   bypass         = "AzureServices"
+  #   ip_rules = ["18.233.39.91"]
+  # }
   lifecycle {
     prevent_destroy = true
   }
