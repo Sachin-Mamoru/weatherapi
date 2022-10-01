@@ -26,6 +26,6 @@ resource "azurerm_key_vault" "keyvault" {
   #   ip_rules = ["18.233.39.91"]
   # }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
